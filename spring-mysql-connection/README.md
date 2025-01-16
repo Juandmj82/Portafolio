@@ -50,9 +50,6 @@ Este proyecto es una aplicación Spring Boot que se conecta a una base de datos 
     - Ejecuta la clase `SpringMysqlConnectionApplication` para iniciar la aplicación.
     - La aplicación estará disponible en `http://localhost:8080`.
 
-## Capturas de Pantalla o Ejemplos de Uso:
-![Ejemplo de Uso](ruta/a/la/captura/de/pantalla.png)
-*Nota: Reemplaza `ruta/a/la/captura/de/pantalla.png` con la ruta real de la captura de pantalla.*
 
 ## Información de Contacto:
 - **Nombre:** Juan Diego Merchán
