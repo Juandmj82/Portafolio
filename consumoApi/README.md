@@ -56,7 +56,7 @@ Si prefieres configurar la variable de entorno a nivel de sistema, puedes hacerl
 ## Información de Contacto:
 - **Nombre:** Juan Diego Merchán
 - **Correo Electrónico:** juandiegosdb@gmail.com
-- **LinkedIn:** [https://www.linkedin.com/in/juan-diego-merch%C3%A1n-321200b4/]
+- **LinkedIn:** [https://www.linkedin.com/in/jdmj/]
 
 ## Licencia:
 Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
