@@ -6,11 +6,11 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class CnsumoApi {
+public class ConsumoAPI {
 
     // creamos un método del tipo String que se llame obtenerDatos
 
-    public String ObtenerDatos(String url) {
+    public String obtenerDatos(String url) {
         // creamos un objeto de tipo HttpClient para hacer la petición a la API
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
