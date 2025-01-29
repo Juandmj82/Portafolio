@@ -4,6 +4,7 @@ import com.example.gestorTareas.exception.ConflictException;
 import com.example.gestorTareas.exception.ResourceNotFoundException;
 import com.example.gestorTareas.model.User;
 import com.example.gestorTareas.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class UserController {
 
     // Método para crear un nuevo usuario
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
         // Verifica si el usuario ya existe
         if (userService.getUserByEmail(user.getEmail()).isPresent()) {
             throw new ConflictException("El usuario con el email " + user.getEmail() + " ya existe."); // Lanza excepción si el usuario ya existe
