@@ -1,5 +1,6 @@
 package com.example.gestorTareas.controller;
 
+import com.example.gestorTareas.exception.ResourceNotFoundException;
 import com.example.gestorTareas.model.Task;
 import com.example.gestorTareas.model.User;
 import com.example.gestorTareas.service.TaskService;
@@ -31,7 +32,8 @@ public class TaskController {
     public ResponseEntity<Task> getTaskById(@PathVariable int id) {
         return taskService.getTaskById(id)
                 .map(ResponseEntity::ok) // Devuelve 200 OK si se encuentra
-                .orElse(ResponseEntity.notFound().build()); // Devuelve 404 si no se encuentra
+                // Lanza excepción si no se encuentra
+                .orElseThrow(() -> new ResourceNotFoundException("Tarea no encontrada con ID: " + id)); // Lanza excepción si no se encuentra
     }
 
     // Método para crear una tarea

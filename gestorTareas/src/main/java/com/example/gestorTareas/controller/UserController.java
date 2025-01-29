@@ -1,24 +1,27 @@
 package com.example.gestorTareas.controller;
 
+import com.example.gestorTareas.exception.ConflictException;
+import com.example.gestorTareas.exception.ResourceNotFoundException;
 import com.example.gestorTareas.model.User;
 import com.example.gestorTareas.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/users") // Mapeo de la ruta base para los usuarios
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserService userService; // Inyección del servicio de usuario
 
     // Método para obtener todos los usuarios
     @GetMapping
-    public List<User> getAllUsers() { // Cambiado a getAllUsers
-        return userService.getAllUsers();
+    public List<User> getAllUsers() {
+        return userService.getAllUsers(); // Devuelve la lista de todos los usuarios
     }
 
     // Método para obtener un usuario por su ID
@@ -26,13 +29,20 @@ public class UserController {
     public ResponseEntity<User> getUserById(@PathVariable int id) {
         return userService.getUserById(id)
                 .map(ResponseEntity::ok) // Devuelve 200 OK si se encuentra
-                .orElse(ResponseEntity.notFound().build()); // Devuelve 404 si no se encuentra
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con ID: " + id)); // Lanza excepción si no se encuentra
     }
 
-    // Método para crear un usuario
+    // Método para crear un nuevo usuario
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        // Verifica si el usuario ya existe
+        if (userService.getUserByEmail(user.getEmail()).isPresent()) {
+            throw new ConflictException("El usuario con el email " + user.getEmail() + " ya existe."); // Lanza excepción si el usuario ya existe
+        }
+
+        // Guarda el nuevo usuario
+        User createdUser = userService.saveUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser); // Devuelve 201 Created con el usuario creado
     }
 
     // Método para eliminar un usuario por su ID

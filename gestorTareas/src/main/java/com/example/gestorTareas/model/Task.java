@@ -7,22 +7,23 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "tareas")
 public class Task {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // Atributos de la clase Task
+    @Id // Clave primaria
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Generación automática de la clave primaria
     private int id;
 
     private String titulo;
     private String descripcion;
     private LocalDate fechaDeVencimiento;
 
-    @Enumerated(EnumType.STRING) // Almacena el enum como cadena
+    @Enumerated(EnumType.STRING) // Almacena el enum como cadena para que sea más legible
     private Prioridad prioridad;
 
     private boolean estado;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false) // Relación con User
-    @JsonBackReference
+    @ManyToOne // Relación muchos a uno con User
+    @JoinColumn(name = "user_id", nullable = false) // Relación con User a través de user_id
+    @JsonBackReference // Evita la recursión infinita en la serialización JSON
     private User user; // Relación con User
 
     // Usamos un enum para definir la prioridad de la tarea
@@ -30,7 +31,7 @@ public class Task {
         ALTA, MEDIA, BAJA
     }
 
-    // Constructor por defecto
+    // Constructor por defecto necesario en JPA
     public Task() {}
 
     // Constructor con parámetros
