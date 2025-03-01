@@ -1,7 +1,7 @@
-public interface Walk {
-    /** TODO 4: declare a functionality or method named
-     *          "walking" with return type "void"
-     */
-    void walking();
+package com.example.service;
 
+// Interfaz que define el método para caminar
+public interface Walk {
+    // Método que indica que el animal está caminando
+    void walking();
 }
