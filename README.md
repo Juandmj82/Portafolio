@@ -1,7 +1,7 @@
 # Portafolio de Juan Diego Merchán
 
 ## Sobre Mí
-Egresado del programa ONE Education de Oracle en asociación con Alura Latam, con una formación en programación orientada a objetos, Spring Framework, y desarrollo de aplicaciones web. Estoy buscando mi primera oportunidad profesional para aplicar y expandir mis conocimientos en un entorno de trabajo real.
+Egresado del programa ONE Education de Oracle en asociación con Alura Latam, con una formación en programación orientada a objetos, Spring Framework, y desarrollo de aplicaciones web. Actualmente curso el programa Amazon Junior Software Developer en Coursera.Estoy buscando mi primera oportunidad profesional para aplicar y expandir mis conocimientos en un entorno de trabajo real.
 
 
 
