@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Lista de Usuarios</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<h1>Usuarios Registrados</h1>
+<div th:if="${#lists.isEmpty(usuarios)}">
+    No hay usuarios registrados.
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Correo</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="usuario : ${usuarios}">
+        <td th:text="${usuario.primerNombre} + ' ' + ${usuario.segundoNombre}"></td>
+        <td th:text="${usuario.apellidos}"></td>
+        <td th:text="${usuario.correo}"></td>
+        <td>
+            <!-- Botón Editar -->
+            <a th:href="@{/editar-usuario/{id}(id=${usuario.id})}" class="edit-button">Editar</a>
+
+            <!-- Botón Eliminar -->
+            <a href="#" class="delete-button" th:data-id="${usuario.id}">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="nuevo-usuario-container">
+    <a href="/registro" class="nuevo-usuario-btn">Nuevo usuario</a>
+</div>
+<!-- Vincula la librería SweetAlert2 desde un CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Vincula tu archivo JavaScript personalizado usando Thymeleaf -->
+<script th:src="@{/js/alertas.js}"></script>
+
+<!-- Bloque JavaScript para manejar alertas -->
+<script th:inline="javascript">
+    console.log("Iniciando script...");
+    var actualizacionExitosa = /*[[${actualizacionExitosa}]]*/ false;
+    console.log("Valor de actualizacionExitosa:", actualizacionExitosa);
+
+    if (actualizacionExitosa) {
+        RegistroAlertas.actualizacionExitosa();
+    }
+
+    var eliminacionExitosa = /*[[${eliminacionExitosa}]]*/ false;
+    console.log("Valor de eliminacionExitosa:", eliminacionExitosa);
+
+    if (eliminacionExitosa) {
+        RegistroAlertas.eliminacionExitosa();
+    }
+</script>
+<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        const deleteButtons = document.querySelectorAll(".delete-button");
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+                const userId = this.getAttribute("data-id");
+                RegistroAlertas.confirmarEliminacion(userId, function (id) {
+                    window.location.href = `/eliminar/${id}`;
+                });
+            });
+        });
+    });
+</script>
+<div th:replace="~{fragments/footer :: div}"></div>
+</body>
+</html>
