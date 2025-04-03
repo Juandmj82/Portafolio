@@ -1,0 +1,29 @@
+<!-- Fragmento de Thymeleaf para reutilizar el header en diferentes vistas -->
+<div th:fragment="header" class="text-center">
+
+  <!-- Barra de navegación con Bootstrap -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center">
+
+    <!-- Lista de enlaces de navegación -->
+    <ul class="navbar-nav">
+
+      <!-- Enlace a la página de inicio -->
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/}">Inicio</a>
+      </li>
+
+      <!-- Enlace a la lista de productos -->
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/productos}">Productos</a>
+      </li>
+
+      <!-- Enlace al formulario para registrar un nuevo producto -->
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/productos/formulario}">Registrar Producto</a>
+      </li>
+
+    </ul>
+
+  </nav>
+
+</div>
