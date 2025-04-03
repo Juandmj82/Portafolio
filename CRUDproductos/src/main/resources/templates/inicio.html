@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,7 +55,8 @@
         </div>
     </div>
 
-
+    <!-- Botón para ir a la lista de productos -->
+    <a th:href="@{/productos}" class="btn btn-primary mt-4">Ver Productos</a>
 </main>
 
 <!-- Fragmento del footer -->

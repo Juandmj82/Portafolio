@@ -1,0 +1,15 @@
+<footer class="text-center py-3 border-top bg-primary text-white w-100">
+    <p>&copy; <span id="year"></span> Juan Diego Merchán | CRUD Productos. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+    // Esperar a que el DOM esté completamente cargado antes de ejecutar el script
+    document.addEventListener("DOMContentLoaded", function () {
+        let yearElement = document.getElementById("year");
+
+        // Verificar si el elemento existe antes de modificarlo
+        if (yearElement) {
+            yearElement.textContent = new Date().getFullYear(); // Establecer el año actual
+        }
+    });
+</script>
