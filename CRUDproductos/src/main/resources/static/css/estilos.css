@@ -1,0 +1,110 @@
+/* NAVBAR */
+.navbar {
+    padding: 1rem 0;
+    background-color: white;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.nav-link {
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.3rem 0.5rem !important;
+    transition: opacity 0.2s;
+}
+
+.nav-link:hover {
+    opacity: 0.8;
+    text-decoration: none;
+}
+
+/* TABLAS */
+.table thead th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* CARRUSEL */
+.carousel {
+    max-height: 400px;
+}
+
+.carousel-container {
+    max-height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel img {
+    max-height: 60vh;
+    width: 100%;
+    object-fit: contain;
+    object-position: center;
+    background-color: #fff;
+}
+
+/* FORMULARIOS */
+input.is-invalid,
+select.is-invalid,
+textarea.is-invalid {
+    border: 2px solid #dc3545;
+    background-color: #ffeeee;
+}
+
+.invalid-feedback {
+    display: block;
+    color: #dc3545;
+}
+
+/* LOGIN */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.text-muted {
+    font-size: 0.9rem;
+    color: #6c757d !important;
+}
+
+/* BOTONES */
+.btn {
+    transition: all 0.2s;
+}
+
+/* ESPACIADOS */
+.mt-6 {
+    margin-top: 4rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .carousel-container {
+        max-height: 40vh;
+    }
+}
+/* Estilos para campos inválidos */
+.is-invalid {
+    border-color: #dc3545 !important;
+    background-color: #fff8f8 !important;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 0.25rem;
+}
+
+/* Mejora visual para los labels */
+.form-label {
+    font-weight: 500;
+}
+
+.form-label.required:after {
+    content: " *";
+    color: #dc3545;
+}
