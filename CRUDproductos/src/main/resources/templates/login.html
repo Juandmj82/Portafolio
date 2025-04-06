@@ -1,36 +1,66 @@
 <!DOCTYPE html>
+<!-- Declaramos que el documento está escrito en HTML5 -->
 <html xmlns:th="http://www.thymeleaf.org">
+<!-- Declaramos el espacio de nombres de Thymeleaf para usar sus atributos -->
+
 <head>
     <meta charset="UTF-8">
+    <!-- Establece la codificación de caracteres a UTF-8 -->
+
     <title>Login</title>
+    <!-- Título que se mostrará en la pestaña del navegador -->
+
+    <!-- Estilos de Bootstrap para el diseño -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- Iconos de Bootstrap (se usan como íconos decorativos en botones, etc.) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 </head>
-<body class="bg-light">
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-4">
-            <div class="card shadow">
-                <div class="card-body p-4">
-                    <h2 class="text-center mb-4">Iniciar Sesión</h2>
 
+<body class="bg-light">
+<!-- Cuerpo de la página con fondo claro usando clase de Bootstrap -->
+
+<div class="container mt-5">
+    <!-- Contenedor principal con margen superior -->
+
+    <div class="row justify-content-center">
+        <!-- Fila centrada horizontalmente -->
+
+        <div class="col-md-6 col-lg-4">
+            <!-- Columna adaptable al tamaño de pantalla -->
+
+            <div class="card shadow">
+                <!-- Tarjeta con sombra -->
+
+                <div class="card-body p-4">
+                    <!-- Cuerpo de la tarjeta con padding -->
+
+                    <h2 class="text-center mb-4">Iniciar Sesión</h2>
+                    <!-- Título centrado -->
+
+                    <!-- Formulario que envía los datos a la URL /login con método POST -->
                     <form th:action="@{/login}" method="post">
+
+                        <!-- Campo de texto para el nombre de usuario -->
                         <div class="mb-3">
                             <label for="username" class="form-label">Usuario:</label>
                             <input type="text" id="username" name="username" class="form-control" required>
                         </div>
 
+                        <!-- Campo de texto para la contraseña -->
                         <div class="mb-3">
                             <label for="password" class="form-label">Contraseña:</label>
                             <input type="password" id="password" name="password" class="form-control" required>
                         </div>
 
+                        <!-- Botón de envío -->
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">
                                 <i class="bi bi-box-arrow-in-right"></i> Entrar
                             </button>
                         </div>
 
+                        <!-- Alerta en caso de error (credenciales incorrectas) -->
                         <div th:if="${param.error}" class="alert alert-danger mt-3">
                             Credenciales incorrectas
                         </div>
@@ -38,6 +68,7 @@
                 </div>
             </div>
 
+            <!-- Información de prueba (para desarrollo o presentación) -->
             <div class="text-center mt-3">
                 <p class="text-muted">Prueba con:</p>
                 <p><strong>Admin:</strong> admin / admin123</p>

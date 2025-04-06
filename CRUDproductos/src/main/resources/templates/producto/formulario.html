@@ -3,80 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Producto</title>
-
-    <!-- Enlace a la hoja de estilos personalizada -->
+    <title th:text="${producto.id != null} ? 'Editar Producto' : 'Nuevo Producto'"></title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
-
-    <!-- Enlace a Bootstrap para el diseño responsivo -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
-<body class="container mt-4">
 
-<!-- Importa el fragmento del header -->
+<body class="container mt-4">
 <div th:replace="~{fragments/header :: header}"></div>
 
 <main class="container">
-    <h1 class="text-center mb-4">Registrar Producto</h1>
+    <h1 class="text-center mb-4" th:text="${producto.id != null} ? 'Editar Producto' : 'Nuevo Producto'"></h1>
 
     <div class="d-flex justify-content-center">
-        <!-- Formulario de registro de productos -->
-        <form id="productoForm"
-              th:action="@{/productos/guardar}"
-              th:object="${producto}"
-              method="post"
+        <form id="productoForm" th:action="@{/productos/guardar}"
+              th:object="${producto}" method="post"
               class="row g-3 p-4 border rounded shadow bg-light">
 
-            <!-- Campo oculto para almacenar el ID del producto (si es una edición) -->
             <input type="hidden" th:field="*{id}">
 
-            <!-- Campo para el nombre del producto -->
+            <!-- Campo Nombre -->
             <div class="col-md-6">
                 <label for="name" class="form-label">Nombre:</label>
-                <input type="text" id="name" th:field="*{name}" class="form-control"
-                       placeholder="Ej. Laptop" required>
+                <input type="text" id="name" th:field="*{name}"
+                       class="form-control" placeholder="Ej. Laptop"
+                       th:classappend="${#fields.hasErrors('name')} ? 'is-invalid'">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}"
+                     th:errors="*{name}"></div>
             </div>
 
-            <!-- Campo para la descripción del producto -->
+            <!-- Campo Descripción -->
             <div class="col-md-6">
                 <label for="descripcion" class="form-label">Descripción:</label>
-                <input type="text" id="descripcion" th:field="*{descripcion}" class="form-control"
-                       placeholder="Ej. Laptop gamer 16GB RAM">
+                <input type="text" id="descripcion" th:field="*{descripcion}"
+                       class="form-control" placeholder="Ej. Laptop gamer 16GB RAM"
+                       th:classappend="${#fields.hasErrors('descripcion')} ? 'is-invalid'">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('descripcion')}"
+                     th:errors="*{descripcion}"></div>
             </div>
 
-            <!-- Campo para el precio del producto -->
+            <!-- Campo Precio -->
             <div class="col-md-6">
                 <label for="precio" class="form-label">Precio:</label>
                 <input type="number" step="0.01" id="precio" th:field="*{precio}"
-                       class="form-control" placeholder="Ej. 1299.99" required>
+                       class="form-control" placeholder="Ej. 1299.99"
+                       th:classappend="${#fields.hasErrors('precio')} ? 'is-invalid'">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('precio')}"
+                     th:errors="*{precio}"></div>
             </div>
 
-            <!-- Campo para la cantidad en stock -->
+            <!-- Campo Stock -->
             <div class="col-md-6">
                 <label for="stock" class="form-label">Stock:</label>
-                <input type="number" id="stock" th:field="*{stock}" class="form-control"
-                       placeholder="Ej. 50" required>
+                <input type="number" id="stock" th:field="*{stock}"
+                       class="form-control" placeholder="Ej. 50"
+                       th:classappend="${#fields.hasErrors('stock')} ? 'is-invalid'">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('stock')}"
+                     th:errors="*{stock}"></div>
             </div>
 
-            <!-- Botón para enviar el formulario -->
             <div class="col-12 text-center">
                 <button type="submit" class="btn btn-primary px-4">Guardar</button>
             </div>
-
         </form>
     </div>
 </main>
 
-<!-- Importa el fragmento del footer -->
 <div th:replace="~{fragments/footer :: footer}"></div>
 
-<!-- Campo oculto para manejar mensajes de error -->
-<input type="hidden" id="errorMessage"
-       th:value="${errorMessage}"
-       th:attr="data-errors=${errorFields}">
+<!-- Mensajes globales -->
+<input type="hidden" id="errorMessage" th:value="${errorMessage}">
+<input type="hidden" id="successMessage" th:value="${successMessage}">
 
-<!-- Script personalizado -->
 <script src="/js/scripts.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

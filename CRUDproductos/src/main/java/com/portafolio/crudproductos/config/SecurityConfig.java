@@ -5,36 +5,26 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity  // Habilita la seguridad web
 public class SecurityConfig {
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
     public UserDetailsService userDetailsService() {
+        // Crea usuarios en memoria (solo para desarrollo)
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-
         manager.createUser(User.withUsername("user")
-                .password(passwordEncoder().encode("password"))
+                .password("{noop}password")  // {noop} indica que la contraseña no está encriptada (solo pruebas)
                 .roles("USER")
                 .build());
-
         manager.createUser(User.withUsername("admin")
-                .password(passwordEncoder().encode("admin123"))
+                .password("{noop}admin123")
                 .roles("ADMIN")
                 .build());
-
         return manager;
     }
 
@@ -42,32 +32,18 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login", "/productos", "/css/**", "/js/**", "/images/**").permitAll()
-                        .requestMatchers("/productos/editar/**", "/productos/eliminar/**").hasRole("ADMIN")
-                        .requestMatchers("/productos/formulario", "/productos/guardar").authenticated()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/","/login", "/css/**", "/js/**", "/images/**").permitAll()                        .requestMatchers("/productos/editar/**", "/productos/eliminar/**").hasRole("ADMIN")  // Solo ADMIN
+                        .anyRequest().authenticated()  // El resto requiere autenticación
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/productos", true)
+                        .loginPage("/login")  // Página de login personalizada
+                        .defaultSuccessUrl("/productos", true)  // Redirige aquí tras login exitoso
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/")
+                        .logoutSuccessUrl("/")  // Redirige a la raíz tras logout
                         .permitAll()
-                )
-                .exceptionHandling(exception -> exception
-                        .accessDeniedHandler(accessDeniedHandler())
                 );
-
         return http.build();
-    }
-
-    @Bean
-    public AccessDeniedHandler accessDeniedHandler() {
-        return (request, response, accessDeniedException) -> {
-            request.getSession().setAttribute("errorMessage", "Acceso denegado: No tienes permisos de administrador");
-            response.sendRedirect("/productos");
-        };
     }
 }

@@ -1,15 +1,14 @@
-<footer class="text-center py-3 border-top bg-primary text-white w-100">
-    <p>&copy; <span id="year"></span> Juan Diego Merchán | CRUD Productos. Todos los derechos reservados.</p>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Fragmento reutilizable de pie de página -->
+<footer th:fragment="footer"
+        class="text-center py-3 bg-primary text-white fixed-bottom">
+
+    <!-- Párrafo centrado sin margen inferior -->
+    <p class="mb-0">
+        <!-- Muestra el año actual dinámicamente usando Thymeleaf -->
+        &copy; <span th:text="${#temporals.year(#temporals.createNow())}"></span>
+        Juan Diego Merchán | CRUD Productos. Todos los derechos reservados.
+    </p>
+
 </footer>
-
-<script>
-    // Esperar a que el DOM esté completamente cargado antes de ejecutar el script
-    document.addEventListener("DOMContentLoaded", function () {
-        let yearElement = document.getElementById("year");
-
-        // Verificar si el elemento existe antes de modificarlo
-        if (yearElement) {
-            yearElement.textContent = new Date().getFullYear(); // Establecer el año actual
-        }
-    });
-</script>

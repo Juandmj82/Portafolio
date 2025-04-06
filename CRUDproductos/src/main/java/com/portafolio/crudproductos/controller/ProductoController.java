@@ -1,93 +1,76 @@
 package com.portafolio.crudproductos.controller;
 
 import com.portafolio.crudproductos.model.Producto;
-import com.portafolio.crudproductos.repository.ProductoRepository;
+import com.portafolio.crudproductos.service.ProductoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Controller
-@RequestMapping("/productos")
+@RequestMapping("/productos")  // Todas las rutas en esta clase empiezan con "/productos"
 public class ProductoController {
 
-    @Autowired
-    private ProductoRepository productoRepository;
+    @Autowired  // Inyecta automáticamente el servicio (Spring se encarga de la instancia)
+    private ProductoService productoService;
 
-    /**
-     * Muestra la lista de productos en la vista.
-     */
-    @GetMapping
+    // Listar todos los productos
+    @GetMapping  // Equivalente a @GetMapping("/productos")
     public String listarProductos(Model model) {
-        model.addAttribute("productos", productoRepository.findAll());
-        return "producto/lista";
+        model.addAttribute("productos", productoService.obtenerTodos());  // Envía la lista de productos a la vista
+        return "producto/lista";  // Retorna la vista 'lista.html'
     }
 
-    /**
-     * Muestra el formulario de registro de productos.
-     */
+    // Mostrar formulario de registro (solo para ADMIN)
+    @PreAuthorize("hasRole('ADMIN')")  // Solo usuarios con rol ADMIN pueden acceder
     @GetMapping("/formulario")
     public String mostrarFormularioRegistro(Model model) {
-        model.addAttribute("producto", new Producto());
+        model.addAttribute("producto", new Producto());  // Envía un producto vacío al formulario
         return "producto/formulario";
     }
 
-    /**
-     * Guarda o actualiza un producto en la base de datos.
-     * Valida el formulario y maneja los errores antes de persistir la información.
-     */
+    // Guardar o actualizar un producto
     @PostMapping("/guardar")
-    public String guardarProducto(@Valid @ModelAttribute Producto producto, BindingResult result, RedirectAttributes redirectAttributes) {
+    public String guardarProducto(
+            @Valid @ModelAttribute Producto producto,  // Valida el objeto Producto según las anotaciones en el modelo
+            BindingResult result,  // Contiene los errores de validación
+            RedirectAttributes redirectAttributes  // Envía mensajes entre redirecciones
+    ) {
         if (result.hasErrors()) {
+            // Si hay errores, reenvía los datos al formulario
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.producto", result);
+            redirectAttributes.addFlashAttribute("producto", producto);
             redirectAttributes.addFlashAttribute("errorMessage", "Corrige los errores en el formulario.");
-
-            // Capturar los campos con errores para resaltarlos en la vista
-            List<String> errorFields = result.getFieldErrors()
-                    .stream()
-                    .map(FieldError::getField)
-                    .collect(Collectors.toList());
-
-            redirectAttributes.addFlashAttribute("errorFields", errorFields);
             return "redirect:/productos/formulario";
         }
 
-        // Determinar si el producto es nuevo o una actualización
-        boolean esNuevo = producto.getId() == null || !productoRepository.existsById(producto.getId());
+        // Guarda el producto y define si es nuevo o una actualización
+        productoService.guardarProducto(producto);
+        redirectAttributes.addFlashAttribute("successMessage",
+                producto.getId() == null ? "Producto registrado con éxito!" : "Producto actualizado con éxito!");
 
-        productoRepository.save(producto);
-
-        // Mensaje de éxito según la acción realizada
-        redirectAttributes.addFlashAttribute("successMessage", esNuevo ? "Producto registrado con éxito!" : "Producto actualizado con éxito!");
-
-        return "redirect:/productos";
+        return "redirect:/productos";  // Redirige a la lista de productos
     }
 
-    /**
-     * Carga un producto existente en el formulario para su edición.
-     */
+    // Editar producto (solo ADMIN)
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/editar/{id}")
     public String editarProducto(@PathVariable Long id, Model model) {
-        Producto producto = productoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado con ID: " + id));
-
-        model.addAttribute("producto", producto);
+        Producto producto = productoService.obtenerPorId(id);  // Busca el producto por ID
+        model.addAttribute("producto", producto);  // Envía el producto a editar al formulario
         return "producto/formulario";
     }
 
-    /**
-     * Elimina un producto por su ID y redirige a la lista de productos.
-     */
+    // Eliminar producto (solo ADMIN)
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/eliminar/{id}")
     public String eliminarProducto(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-        if (productoRepository.existsById(id)) {
-            productoRepository.deleteById(id);
+        if (productoService.existeProducto(id)) {
+            productoService.eliminarProducto(id);
             redirectAttributes.addFlashAttribute("successMessage", "Producto eliminado correctamente.");
         } else {
             redirectAttributes.addFlashAttribute("errorMessage", "El producto no existe.");

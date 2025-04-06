@@ -1,68 +1,78 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<!-- Indica que el documento es HTML5 -->
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!-- 'lang="es"' establece el idioma del contenido como español
+     'xmlns:th' habilita atributos de Thymeleaf
+     'xmlns:sec' permite usar expresiones de seguridad de Spring Security -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido</title>
+    <meta charset="UTF-8"> <!-- Define la codificación de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Hace el sitio responsive -->
+    <title>Bienvenido</title> <!-- Título de la pestaña del navegador -->
 
-    <!-- Enlace a los estilos personalizados -->
+    <!-- Enlace a los estilos personalizados con Thymeleaf -->
     <link rel="stylesheet" th:href="@{/css/estilos.css}">
 
-    <!-- Bootstrap -->
+    <!-- Enlace al CSS de Bootstrap desde CDN para diseño responsive -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
+
+<!-- Establece márgenes y centra el contenido con Bootstrap -->
 <body class="container mt-4">
 
-<!-- Fragmento del header -->
+<!-- Carga el fragmento de header reutilizable -->
 <div th:replace="~{fragments/header :: header}"></div>
 
+<!-- Contenido principal centrado -->
 <main class="text-center">
     <h1 class="mb-4">¡Bienvenido al CRUD de Productos!</h1>
 
-    <!-- Contenedor del carrusel para mejorar la presentación -->
+    <!-- Contenedor del carrusel con imágenes de ejemplo -->
     <div class="carousel-container">
+        <!-- Carrusel de Bootstrap configurado para deslizar automáticamente cada 3 segundos -->
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
 
-            <!-- Indicadores de las diapositivas -->
+            <!-- Indicadores que permiten al usuario ver en qué imagen está -->
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
             </div>
 
-            <!-- Contenido del carrusel -->
+            <!-- Imágenes del carrusel -->
             <div class="carousel-inner">
+                <!-- Primera imagen activa al cargar -->
                 <div class="carousel-item active">
                     <img src="/images/producto1.jpg" class="d-block w-100" alt="Producto 1">
                 </div>
+                <!-- Segunda imagen -->
                 <div class="carousel-item">
                     <img src="/images/producto2.jpg" class="d-block w-100" alt="Producto 2">
                 </div>
+                <!-- Tercera imagen -->
                 <div class="carousel-item">
                     <img src="/images/producto3.jpg" class="d-block w-100" alt="Producto 3">
                 </div>
             </div>
 
-            <!-- Botones de navegación del carrusel -->
+            <!-- Botón para ir a la imagen anterior -->
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Anterior</span>
             </button>
+
+            <!-- Botón para ir a la imagen siguiente -->
             <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Siguiente</span>
             </button>
         </div>
     </div>
-
-    <!-- Botón para ir a la lista de productos -->
-    <a th:href="@{/productos}" class="btn btn-primary mt-4">Ver Productos</a>
 </main>
 
-<!-- Fragmento del footer -->
+<!-- Carga el fragmento de footer reutilizable -->
 <div th:replace="~{fragments/footer :: footer}"></div>
 
-<!-- Scripts de Bootstrap -->
+<!-- Script JS de Bootstrap necesario para activar el carrusel y otros componentes -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
