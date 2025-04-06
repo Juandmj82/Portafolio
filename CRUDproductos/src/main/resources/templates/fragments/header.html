@@ -1,38 +1,47 @@
-<!-- fragments/header.html -->
-<div th:fragment="header" xmlns:th="http://www.thymeleaf.org"
+<!-- Fragmento reutilizable de cabecera -->
+<div th:fragment="header"
+     xmlns:th="http://www.thymeleaf.org"
      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+  <!-- Barra de navegación principal -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
 
-      <!-- Logo y enlace a Inicio -->
+      <!-- Logo de la aplicación que redirige al inicio -->
       <a class="navbar-brand" th:href="@{/}">Inicio</a>
 
-      <!-- Enlace a Productos (visible siempre) -->
+      <!-- Enlace a la lista de productos (visible para todos los usuarios) -->
       <a class="nav-link" th:href="@{/productos}">Productos</a>
 
-      <!-- Registrar Producto (SOLO para ADMIN) -->
+      <!-- Enlace para registrar producto (solo visible para usuarios con rol ADMIN) -->
       <a class="nav-link"
          th:href="@{/productos/formulario}"
          sec:authorize="hasRole('ADMIN')">
         Registrar Producto
       </a>
 
-      <!-- Menú de usuario (derecha) -->
+      <!-- Sección alineada a la derecha para el menú de usuario -->
       <div class="ms-auto">
         <ul class="navbar-nav">
-          <!-- Usuario NO autenticado -->
+
+          <!-- Si el usuario NO está autenticado, muestra botón de login -->
           <li class="nav-item" sec:authorize="!isAuthenticated()">
             <a class="btn btn-outline-primary" th:href="@{/login}">Login</a>
           </li>
 
-          <!-- Usuario autenticado -->
+          <!-- Si el usuario está autenticado, muestra menú desplegable -->
           <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              <!-- Muestra el rol actual como texto: "Admin" o "Usuario" -->
               <span sec:authentication="principal.authorities"
-                    th:text="${#strings.contains(#authentication.principal.authorities, 'ROLE_ADMIN') ? 'Admin' : 'Usuario'}"></span>
+                    th:text="${#strings.contains(#authentication.principal.authorities, 'ROLE_ADMIN') ? 'Admin' : 'Usuario'}">
+              </span>
             </a>
+
+            <!-- Opciones del menú desplegable (actualmente solo "Salir") -->
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
+                <!-- Botón para cerrar sesión (POST a /logout) -->
                 <form th:action="@{/logout}" method="post">
                   <button type="submit" class="dropdown-item">
                     <i class="bi bi-box-arrow-right"></i> Salir
@@ -41,6 +50,7 @@
               </li>
             </ul>
           </li>
+
         </ul>
       </div>
     </div>

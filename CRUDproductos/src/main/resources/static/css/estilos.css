@@ -1,110 +1,120 @@
-/* NAVBAR */
+/* ===================== */
+/* NAVBAR - Barra de navegación */
+/* ===================== */
 .navbar {
-    padding: 1rem 0;
-    background-color: white;
-    border-bottom: 1px solid #dee2e6;
+    padding: 1rem 0;  /* Espaciado vertical */
+    background-color: white;  /* Fondo blanco */
+    border-bottom: 1px solid #dee2e6;  /* Línea inferior gris claro */
 }
 
 .nav-link {
-    font-size: 1.1rem;
-    font-weight: 500;
-    padding: 0.3rem 0.5rem !important;
-    transition: opacity 0.2s;
+    font-size: 1.1rem;  /* Tamaño del texto de los links */
+    font-weight: 500;   /* Peso de fuente medio */
+    padding: 0.3rem 0.5rem !important;  /* Espaciado interior */
+    transition: opacity 0.2s;  /* Transición suave al pasar el mouse */
 }
 
 .nav-link:hover {
-    opacity: 0.8;
-    text-decoration: none;
+    opacity: 0.8;  /* Ligero oscurecimiento al pasar el mouse */
+    text-decoration: none;  /* Quita subrayado */
 }
 
+/* ===================== */
 /* TABLAS */
+/* ===================== */
 .table thead th {
-    text-align: center;
-    vertical-align: middle;
+    text-align: center;  /* Centra el texto en los encabezados */
+    vertical-align: middle;  /* Alinea verticalmente al centro */
 }
 
 .table td {
-    vertical-align: middle;
+    vertical-align: middle;  /* Centra verticalmente el contenido de las celdas */
 }
 
+/* ===================== */
 /* CARRUSEL */
+/* ===================== */
 .carousel {
-    max-height: 400px;
+    max-height: 400px;  /* Altura máxima del carrusel */
 }
 
 .carousel-container {
-    max-height: 60vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    max-height: 60vh;  /* 60% de la altura de la ventana */
+    display: flex;  /* Flexbox para alinear contenido */
+    justify-content: center;  /* Centra horizontalmente */
+    align-items: center;  /* Centra verticalmente */
 }
 
 .carousel img {
-    max-height: 60vh;
-    width: 100%;
-    object-fit: contain;
-    object-position: center;
-    background-color: #fff;
+    max-height: 60vh;  /* Evita que la imagen sea más alta que la ventana */
+    width: 100%;  /* Ocupa todo el ancho */
+    object-fit: contain;  /* Ajusta la imagen sin recortar */
+    object-position: center;  /* Centra la imagen */
+    background-color: #fff;  /* Fondo blanco */
 }
 
+/* ===================== */
 /* FORMULARIOS */
+/* ===================== */
+
+/* Campos con error de validación */
 input.is-invalid,
 select.is-invalid,
 textarea.is-invalid {
-    border: 2px solid #dc3545;
-    background-color: #ffeeee;
+    border: 2px solid #dc3545;  /* Borde rojo */
+    background-color: #ffeeee;  /* Fondo rosado suave */
 }
 
 .invalid-feedback {
-    display: block;
-    color: #dc3545;
+    display: block;  /* Se muestra el texto de error debajo del campo */
+    color: #dc3545;  /* Rojo */
+    font-size: 0.875em;  /* Tamaño de letra más pequeño */
+    margin-top: 0.25rem;  /* Margen superior */
 }
 
-/* LOGIN */
-.card {
-    border-radius: 10px;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-}
-
-.text-muted {
-    font-size: 0.9rem;
-    color: #6c757d !important;
-}
-
-/* BOTONES */
-.btn {
-    transition: all 0.2s;
-}
-
-/* ESPACIADOS */
-.mt-6 {
-    margin-top: 4rem;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .carousel-container {
-        max-height: 40vh;
-    }
-}
-/* Estilos para campos inválidos */
-.is-invalid {
-    border-color: #dc3545 !important;
-    background-color: #fff8f8 !important;
-}
-
-.invalid-feedback {
-    color: #dc3545;
-    font-size: 0.875em;
-    margin-top: 0.25rem;
-}
-
-/* Mejora visual para los labels */
+/* Estilo para labels (etiquetas de campos) */
 .form-label {
-    font-weight: 500;
+    font-weight: 500;  /* Negrita intermedia */
 }
 
+/* Agrega un asterisco rojo a los campos requeridos */
 .form-label.required:after {
     content: " *";
     color: #dc3545;
+}
+
+/* ===================== */
+/* LOGIN - Tarjeta de formulario de login */
+/* ===================== */
+.card {
+    border-radius: 10px;  /* Bordes redondeados */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);  /* Sombra suave */
+}
+
+.text-muted {
+    font-size: 0.9rem;  /* Texto un poco más pequeño */
+    color: #6c757d !important;  /* Color gris */
+}
+
+/* ===================== */
+/* BOTONES */
+/* ===================== */
+.btn {
+    transition: all 0.2s;  /* Transición suave en hover */
+}
+
+/* ===================== */
+/* ESPACIADOS PERSONALIZADOS */
+/* ===================== */
+.mt-6 {
+    margin-top: 4rem;  /* Margen superior de 4 rem */
+}
+
+/* ===================== */
+/* RESPONSIVE - Para pantallas pequeñas */
+/* ===================== */
+@media (max-width: 768px) {
+    .carousel-container {
+        max-height: 40vh;  /* Reduce la altura del carrusel en móviles */
+    }
 }
