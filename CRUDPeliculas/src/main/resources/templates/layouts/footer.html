@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Fragmento reutilizable de pie de página -->
+<footer th:fragment="footer"
+        class="text-center py-3 bg-primary text-white fixed-bottom">
+
+  <!-- Párrafo centrado sin margen inferior -->
+  <p class="mb-0">
+    <!-- Muestra el año actual dinámicamente usando Thymeleaf -->
+    &copy; <span th:text="${#temporals.year(#temporals.createNow())}"></span>
+    Juan Diego Merchán | Catálogo Películas. Todos los derechos reservados.
+  </p>
+
+</footer>
