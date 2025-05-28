@@ -19,7 +19,7 @@ Tareas es una aplicación de escritorio desarrollada en Java con JavaFX y Spring
 
 # Captura de Pantalla
 
-![Captura de Pantalla](/screenshots/consola.png)
+![Captura de Pantalla](screenshots/consola.png)
 
 
 
