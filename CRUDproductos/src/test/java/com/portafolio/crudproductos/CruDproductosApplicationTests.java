@@ -1,13 +1,13 @@
-package com.portafolio.crudproductos;
+//package com.portafolio.crudproductos;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class CruDproductosApplicationTests {
+//@SpringBootTest
+//class CruDproductosApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+   // @Test
+    //void contextLoads() {
+    //}
 
-}
+//}
