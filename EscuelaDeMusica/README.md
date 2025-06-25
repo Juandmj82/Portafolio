@@ -90,6 +90,7 @@ spring.datasource.password=tu_password_postgres
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+escuelademusica.app.jwtSecret= JWT creada con el JWT key generator
 ```
 
 ### Pasos para Ejecutar el Backend
