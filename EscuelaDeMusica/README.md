@@ -160,4 +160,6 @@ Gracias al DataLoader, puedes usar las siguientes cuentas para comenzar:
 
 Este es un proyecto de ejercicio. Si tienes sugerencias o mejoras, ¡son bienvenidas!
 
-✒️ **Desarrollado por [Juan Diego Merhcán]** - Aprendiendo Spring Boot 🚀
+contacto: juandiegosdb@gmail.com
+
+✒️ **Desarrollado por [Juan Diego Merchán]** - Aprendiendo Spring Boot 🚀
