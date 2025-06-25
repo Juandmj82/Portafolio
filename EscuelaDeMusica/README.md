@@ -162,5 +162,6 @@ Este es un proyecto de ejercicio. Si tienes sugerencias o mejoras, ¡son bienven
 
 contacto: juandiegosdb@gmail.com
 Linkedin: https://www.linkedin.com/in/jdmj/
+Colombia
 
 ✒️ **Desarrollado por [Juan Diego Merchán]** - Aprendiendo Spring Boot 🚀
